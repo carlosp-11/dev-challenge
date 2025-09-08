@@ -58,14 +58,12 @@ GROUP BY im.product_id, im.warehouse_id;
 
 ## 🚀 Puesta en marcha
 
-1. **Requisitos**: **PHP 7.2+**, Composer, una BD (SQL Server).
+1. **Requisitos**: **PHP 7.4**, Composer, una BD (SQL Server).
 2. **Configura entorno**:
    ```bash
    # Encontrarás el fichero .env en el escritorio del ordenador ya configurado.*
    composer install
    php artisan migrate
-   npm install
-   npm run dev
    php artisan serve
    ```
 3. **Usuario de acceso**:
