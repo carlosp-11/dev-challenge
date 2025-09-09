@@ -16,17 +16,7 @@ class CreateProductsTable extends Migration
             $table->timestamps();
         });
 
-        DB::table('products')->insert([
-            ['sku' => 'COL-135', 'name' => 'Colchón 135x190'],
-        ]);
-
-        DB::table('products')->insert([
-            ['sku' => 'COL-150', 'name' => 'Colchón 150x190'],
-        ]);
-
-        DB::table('products')->insert([
-            ['sku' => 'COL-160', 'name' => 'Colchón 160x190'],
-        ]);
+        // Se insertan a través de seeders para mayor volumen de datos
     }
 
     public function down()

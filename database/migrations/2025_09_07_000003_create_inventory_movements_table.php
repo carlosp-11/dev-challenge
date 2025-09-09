@@ -22,27 +22,7 @@ class CreateInventoryMovementsTable extends Migration
             $table->index(['product_id', 'warehouse_id', 'moved_at']);
         });
 
-        DB::table('inventory_movements')->insert([
-            [
-                'product_id' => 1,
-                'warehouse_id' => 1,
-                'type' => 'IN',
-                'quantity' => 100,
-                'reference' => 'Stock inicial',
-                'moved_at' => now(),
-            ],
-        ]);
-
-        DB::table('inventory_movements')->insert([
-            [
-                'product_id' => 2,
-                'warehouse_id' => 2,
-                'type' => 'IN',
-                'quantity' => 50,
-                'reference' => 'Stock inicial',
-                'moved_at' => now(),
-            ],
-        ]);
+        // Se insertan a través de seeders para mayor control
     }
 
     public function down()

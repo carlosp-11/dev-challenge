@@ -17,11 +17,9 @@ class CreateWarehousesTable extends Migration
         });
 
         DB::table('warehouses')->insert([
-            ['code' => 'CAN-01', 'name' => 'Canarias 01'],
-        ]);
-
-        DB::table('warehouses')->insert([
-            ['code' => 'MAD-01', 'name' => 'Madrid 01'],
+            ['code' => 'TNF-01', 'name' => 'Tenerife'],
+            ['code' => 'GC-01', 'name' => 'Gran Canaria'],
+            ['code' => 'MAD-01', 'name' => 'Madrid'],
         ]);
     }
 
