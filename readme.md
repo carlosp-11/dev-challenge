@@ -64,6 +64,7 @@ GROUP BY im.product_id, im.warehouse_id;
    # Encontrarás el fichero .env en el escritorio del ordenador ya configurado.*
    composer install
    php artisan migrate
+   php artisan db:seed
    php artisan serve
    ```
 3. **Usuario de acceso**:
