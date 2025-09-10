@@ -1,0 +1,608 @@
+// Dormitorum Brand Colors
+$dormitorum-primary: #2ea3f2;     // Azul principal de Dormitorum
+$dormitorum-secondary: #002e54;   // Azul oscuro
+$dormitorum-accent: #f60;         // Naranja para botones
+$dormitorum-success: #28A745;     // Verde (conservado)
+$dormitorum-warning: #f60;        // Naranja para stock medio (cambió de amarillo)
+$dormitorum-danger: #DC3545;      // Rojo para stock bajo
+$dormitorum-light: #F8F9FA;       // Gris claro
+$dormitorum-dark: #212529;        // Gris oscuro
+
+// Custom properties
+:root {
+  --dormitorum-primary: #{$dormitorum-primary};
+  --dormitorum-secondary: #{$dormitorum-secondary};
+  --dormitorum-accent: #{$dormitorum-accent};
+  --dormitorum-gradient: linear-gradient(135deg, #{$dormitorum-primary} 0%, #{darken($dormitorum-primary, 20%)} 100%);
+  --dormitorum-gradient-hover: linear-gradient(135deg, #{darken($dormitorum-primary, 10%)} 0%, #{darken($dormitorum-primary, 30%)} 100%);
+  --dormitorum-gradient-active: linear-gradient(135deg, #{darken($dormitorum-primary, 15%)} 0%, #{darken($dormitorum-primary, 35%)} 100%);
+}
+
+// Override Bootstrap colors
+$primary: $dormitorum-primary;
+$secondary: $dormitorum-secondary;
+$info: $dormitorum-accent;
+$success: $dormitorum-success;
+$warning: $dormitorum-warning;
+$danger: $dormitorum-danger;
+
+// Global Poppins font application
+body {
+  font-family: 'Poppins', sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 600;
+}
+
+.btn {
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 500;
+}
+
+.navbar-brand {
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 700;
+}
+
+// Dormitorum Custom Styles
+.dormitorum-brand {
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+  }
+  
+  .btn {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+  }
+  
+  p, span, div, label, input, select, textarea {
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: $dormitorum-primary !important;
+    text-decoration: none;
+    
+    &:hover {
+      color: $dormitorum-accent !important;
+    }
+  }
+  
+  .bg-dormitorum-gradient {
+    background: var(--dormitorum-gradient) !important;
+    color: white;
+  }
+  
+  .text-dormitorum-primary {
+    color: $dormitorum-primary !important;
+  }
+  
+  .text-dormitorum-accent {
+    color: $dormitorum-accent !important;
+  }
+  
+  .btn-dormitorum {
+    background: var(--dormitorum-gradient);
+    border: none;
+    color: white;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba($dormitorum-primary, 0.3);
+    
+    &:hover {
+      background: var(--dormitorum-gradient-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba($dormitorum-primary, 0.4);
+      color: white;
+    }
+    
+    &:active {
+      background: var(--dormitorum-gradient-active);
+      transform: translateY(0);
+      box-shadow: 0 2px 10px rgba($dormitorum-primary, 0.3);
+    }
+    
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba($dormitorum-primary, 0.25);
+    }
+  }
+  
+  .card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .card-header {
+      background: linear-gradient(135deg, $dormitorum-light 0%, rgba($dormitorum-primary, 0.05) 100%);
+      border-bottom: 2px solid $dormitorum-primary;
+      font-weight: 600;
+      color: $dormitorum-primary;
+    }
+  }
+  
+  .nav-tabs {
+    border-bottom: 3px solid $dormitorum-primary;
+    
+    .nav-link {
+      border: none;
+      color: $dormitorum-secondary;
+      font-weight: 500;
+      padding: 12px 20px;
+      margin-right: 5px;
+      border-radius: 8px 8px 0 0;
+      transition: all 0.3s ease;
+      background: none;
+      
+      // Asegurar espaciado entre iconos y texto
+      i {
+        margin-right: 8px !important;
+      }
+      
+      &:hover {
+        background-color: rgba($dormitorum-primary, 0.1);
+        color: $dormitorum-primary;
+        border: none;
+      }
+      
+      &:focus {
+        box-shadow: none;
+        border: none;
+      }
+      
+      &.active {
+        background: var(--dormitorum-gradient);
+        color: white !important;
+        border: none;
+        box-shadow: 0 2px 8px rgba($dormitorum-primary, 0.3);
+      }
+    }
+  }
+  
+  // Espaciado global para iconos en botones
+  .btn {
+    i {
+      margin-right: 6px !important;
+    }
+    
+    &.btn-lg i {
+      margin-right: 8px !important;
+    }
+  }
+  
+  .table {
+    border-radius: 8px;
+    overflow: hidden;
+    
+    .table-dark {
+      background: var(--dormitorum-gradient);
+      
+      th {
+        border: none;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+    }
+    
+    tbody tr {
+      transition: all 0.2s ease;
+      
+      &:hover {
+        background-color: rgba($dormitorum-primary, 0.05);
+        transform: scale(1.01);
+      }
+    }
+  }
+  
+  .badge {
+    font-size: 0.85rem;
+    padding: 0.5em 0.8em;
+    border-radius: 20px;
+    
+    // Corregir contraste para badges primarios
+    &.bg-primary {
+      background-color: $dormitorum-primary !important;
+      color: white !important;
+    }
+    
+    // Espaciado entre iconos y texto en badges
+    i {
+      margin-right: 4px;
+    }
+  }
+  
+  .progress {
+    height: 20px;
+    border-radius: 10px;
+    background-color: rgba($dormitorum-primary, 0.1);
+    
+    .progress-bar {
+      background: var(--dormitorum-gradient);
+      border-radius: 10px;
+    }
+  }
+  
+  .alert {
+    border: none;
+    border-radius: 10px;
+    
+    &.alert-success {
+      background: linear-gradient(135deg, rgba($dormitorum-success, 0.1) 0%, rgba($dormitorum-success, 0.05) 100%);
+      border-left: 4px solid $dormitorum-success;
+    }
+    
+    &.alert-danger {
+      background: linear-gradient(135deg, rgba($dormitorum-danger, 0.1) 0%, rgba($dormitorum-danger, 0.05) 100%);
+      border-left: 4px solid $dormitorum-danger;
+    }
+  }
+  
+  .form-control, .form-select {
+    border: 2px solid rgba($dormitorum-primary, 0.2);
+    border-radius: 8px;
+    
+    &:focus {
+      border-color: $dormitorum-primary;
+      box-shadow: 0 0 0 0.2rem rgba($dormitorum-primary, 0.15);
+    }
+  }
+  
+  // Statistics cards
+  .stats-card {
+    position: relative;
+    overflow: hidden;
+    
+    // Solo aplicar gradiente a tarjetas específicas, no a todas
+    &.bg-dormitorum-gradient::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--dormitorum-gradient);
+    }
+    
+    // Para tarjetas con colores sólidos, usar una línea del mismo color
+    &.bg-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: $dormitorum-primary;
+    }
+    
+    &.bg-secondary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: $dormitorum-secondary;
+    }
+    
+    .card-body {
+      padding: 1.5rem;
+    }
+    
+    h4 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    span {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
+    }
+    
+    .fa-2x {
+      opacity: 0.7;
+    }
+    
+    // Corregir contraste para cards naranjas
+    &.bg-warning {
+      color: white !important;
+      
+      span {
+        color: white !important;
+      }
+    }
+    
+    // Asegurar contraste para otras cards
+    &.bg-success,
+    &.bg-info,
+    &.bg-primary,
+    &.bg-secondary {
+      color: white !important;
+      
+      span {
+        color: white !important;
+      }
+    }
+    
+    // Asegurar que bg-primary use el color correcto
+    &.bg-primary {
+      background-color: $dormitorum-primary !important;
+    }
+    
+    // Asegurar que bg-secondary use el color correcto
+    &.bg-secondary {
+      background-color: $dormitorum-secondary !important;
+    }
+  }
+  
+  // Custom animations
+  .fade-in {
+    animation: fadeIn 0.5s ease-in;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .slide-in {
+    animation: slideIn 0.3s ease-out;
+  }
+  
+  @keyframes slideIn {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  
+  // Header brand styling
+  .header-brand {
+    background: var(--dormitorum-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    
+    .fa-warehouse {
+      background: none;
+      -webkit-text-fill-color: $dormitorum-primary;
+      margin-right: 15px;
+    }
+  }
+  
+  // Loading states
+  .loading-shimmer {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  
+  // Filtros mejorados con espaciado
+  .filters-section {
+    .form-control,
+    .form-select {
+      margin-bottom: 0.75rem;
+    }
+    
+    .btn-group-vertical {
+      .btn {
+        margin-bottom: 0.5rem;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+        
+        // Asegurar espaciado entre iconos y texto
+        i {
+          margin-right: 8px !important;
+        }
+      }
+    }
+  }
+  
+  // Mejoras para formularios en general
+  .form-group {
+    .form-label {
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      
+      // Espaciado consistente para iconos en labels
+      i {
+        margin-right: 8px !important;
+        color: $dormitorum-primary;
+      }
+    }
+    
+    .form-control {
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      
+      &:focus {
+        border-color: $dormitorum-primary;
+        box-shadow: 0 0 0 0.2rem rgba($dormitorum-primary, 0.15);
+      }
+    }
+  }
+  
+  // Mejoras para badges con nuevos colores
+  .badge {
+    &.bg-primary {
+      background-color: $dormitorum-primary !important;
+      color: white !important;
+    }
+    
+    &.bg-secondary {
+      background-color: $dormitorum-secondary !important;
+      color: white !important;
+    }
+    
+    &.bg-accent {
+      background-color: $dormitorum-accent !important;
+      color: white !important;
+    }
+  }
+  
+  // Mejoras para elementos de estado
+  .text-primary {
+    color: $dormitorum-primary !important;
+  }
+  
+  .text-secondary {
+    color: $dormitorum-secondary !important;
+  }
+  
+  .text-accent {
+    color: $dormitorum-accent !important;
+  }
+  
+  // Mejoras para enlaces
+  a {
+    color: $dormitorum-primary;
+    
+    &:hover {
+      color: $dormitorum-accent;
+    }
+  }
+  
+  // Mejora para la visualización de porcentajes
+  .percentage-display {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+    .percentage-bar {
+      flex: 1;
+      min-width: 100px;
+    }
+    
+    .percentage-text {
+      min-width: 60px;
+      font-weight: 600;
+      color: $dormitorum-primary;
+    }
+  }
+  
+  // Tabla mejorada para porcentajes pequeños
+  .stock-percentage-table {
+    .progress {
+      min-height: 25px;
+      
+      .progress-bar {
+        min-width: 2%; // Asegurar visibilidad mínima
+        position: relative;
+        
+        &::after {
+          content: attr(data-percentage);
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          color: white;
+          font-weight: 600;
+          text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+      }
+    }
+    
+    .percentage-value {
+      font-weight: bold;
+      color: $dormitorum-primary;
+      min-width: 70px;
+      text-align: right;
+    }
+  }
+  
+  // Responsive improvements
+  @media (max-width: 768px) {
+    .header-brand {
+      font-size: 1.8rem;
+    }
+    
+    .card {
+      margin-bottom: 1rem;
+    }
+    
+    .table-responsive {
+      border-radius: 8px;
+    }
+    
+    .filters-section .row .col-md-2 {
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+// Brand logo styling
+.dormitorum-logo {
+  max-height: 60px;
+  width: auto;
+  margin-right: 15px;
+}
+
+// Inventory specific styling
+.inventory-dashboard {
+  .movement-type-in {
+    color: $dormitorum-success !important;
+    font-weight: 600;
+  }
+  
+  .movement-type-out {
+    color: $dormitorum-danger !important;
+    font-weight: 600;
+  }
+  
+  .stock-high {
+    color: $dormitorum-success;
+    font-weight: 600;
+  }
+  
+  .stock-medium {
+    color: $dormitorum-warning;
+    font-weight: 600;
+  }
+  
+  .stock-low {
+    color: $dormitorum-danger;
+    font-weight: 600;
+  }
+  
+  .product-sku {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    background: rgba($dormitorum-primary, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: $dormitorum-primary;
+    font-weight: 600;
+  }
+  
+  .warehouse-badge {
+    background: var(--dormitorum-gradient);
+    color: white;
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-weight: 500;
+  }
+}
