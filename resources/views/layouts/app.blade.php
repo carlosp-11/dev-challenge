@@ -19,16 +19,20 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    @yield('scripts')
 </head>
 <body class="dormitorum-brand">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-                    <i class="fas fa-bed text-dormitorum-primary me-2"></i>
-                    <span class="text-dormitorum-primary fw-bold">Dormitorum</span>
-                    <span class="ms-2 text-muted">Inventario</span>
+                    <img src="{{ asset('img/logo-dormitorum-wt-bg.png') }}" alt="Logo Dormitorum" height="50" class="me-2">
+                    <span class="text-dormitorum-primary fw-bold">Dev</span>
+                    <span class="ms-2 text-muted">Challenge</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
