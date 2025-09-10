@@ -17,4 +17,26 @@ ENV LOG_CHANNEL stderr
 # Permitir que composer corra como root
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
-CMD ["/start.sh"]
+# Variables necesarias para Render
+ENV APP_KEY=""
+ENV DB_CONNECTION pgsql
+ENV DATABASE_URL=""
+
+# Configuración adicional para Laravel 6
+ENV SESSION_DRIVER file
+ENV CACHE_DRIVER file
+ENV QUEUE_CONNECTION sync
+
+# Crear script de inicialización específico para Laravel 6
+RUN echo '#!/bin/bash' > /var/www/html/init.sh && \
+    echo 'cd /var/www/html' >> /var/www/html/init.sh && \
+    echo 'composer install --no-dev --optimize-autoloader' >> /var/www/html/init.sh && \
+    echo 'php artisan config:cache' >> /var/www/html/init.sh && \
+    echo 'php artisan route:cache' >> /var/www/html/init.sh && \
+    echo 'php artisan view:cache' >> /var/www/html/init.sh && \
+    echo 'chmod -R 755 storage' >> /var/www/html/init.sh && \
+    echo 'chmod -R 755 bootstrap/cache' >> /var/www/html/init.sh && \
+    chmod +x /var/www/html/init.sh
+
+# Ejecutar inicialización y luego el comando original
+CMD ["/bin/bash", "-c", "/var/www/html/init.sh && /start.sh"]
