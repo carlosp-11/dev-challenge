@@ -20,4 +20,6 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
     Route::get('/home', 'InventoryController@index')->name('inventory.index');
     Route::post('/inventory/move', 'InventoryController@store')->name('inventory.store');
+    Route::post('/products', 'ProductController@store')->name('products.store');
+    Route::post('/warehouses', 'WarehouseController@store')->name('warehouses.store');
 });

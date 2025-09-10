@@ -53,25 +53,34 @@ class InventoryController extends Controller
         // Paginación de movimientos
         $movements = $movementsQuery->paginate(15)->appends($request->query());
 
-        // Calcular stock por producto y almacén
-        $stockByProductWarehouse = DB::table('inventory_movements as im')
+        // Consulta base para stock por producto y almacén
+        $stockByProductWarehouseQuery = DB::table('inventory_movements as im')
             ->select([
                 'im.product_id',
                 'im.warehouse_id',
                 'p.name as product_name',
                 'p.sku as product_sku',
                 'w.name as warehouse_name',
+                'w.code as warehouse_code',
                 DB::raw('SUM(CASE WHEN im.type = "IN" THEN im.quantity ELSE 0 END) - SUM(CASE WHEN im.type = "OUT" THEN im.quantity ELSE 0 END) as stock')
             ])
             ->join('products as p', 'p.id', '=', 'im.product_id')
             ->join('warehouses as w', 'w.id', '=', 'im.warehouse_id')
-            ->groupBy('im.product_id', 'im.warehouse_id', 'p.name', 'p.sku', 'w.name')
-            ->having('stock', '>', 0) // Solo mostrar productos con stock positivo
+            ->groupBy('im.product_id', 'im.warehouse_id', 'p.name', 'p.sku', 'w.name', 'w.code')
+            ->having('stock', '>', 0); // Solo mostrar productos con stock positivo
+            
+        // Aplicar filtro de almacén si existe
+        if ($request->filled('warehouse_filter')) {
+            $stockByProductWarehouseQuery->where('im.warehouse_id', $request->warehouse_filter);
+        }
+        
+        // Obtener resultados ordenados por nombre de producto
+        $stockByProductWarehouse = $stockByProductWarehouseQuery
             ->orderBy('p.name')
             ->get();
 
-        // Calcular stock total por producto
-        $stockByProduct = DB::table('inventory_movements as im')
+        // Consulta base para stock total por producto
+        $stockByProductQuery = DB::table('inventory_movements as im')
             ->select([
                 'im.product_id',
                 'p.name as product_name',
@@ -80,7 +89,32 @@ class InventoryController extends Controller
             ])
             ->join('products as p', 'p.id', '=', 'im.product_id')
             ->groupBy('im.product_id', 'p.name', 'p.sku')
-            ->having('total_stock', '>', 0)
+            ->having('total_stock', '>', 0);
+            
+        // Aplicar filtro de producto si existe
+        if ($request->filled('product_filter')) {
+            $stockByProductQuery->where('im.product_id', $request->product_filter);
+            
+            // Si hay un filtro de producto activo, queremos detallar el stock por almacén
+            $productStockByWarehouse = DB::table('inventory_movements as im')
+                ->select([
+                    'im.warehouse_id',
+                    'w.name as warehouse_name',
+                    'w.code as warehouse_code',
+                    DB::raw('SUM(CASE WHEN im.type = "IN" THEN im.quantity ELSE 0 END) - SUM(CASE WHEN im.type = "OUT" THEN im.quantity ELSE 0 END) as warehouse_stock')
+                ])
+                ->join('warehouses as w', 'w.id', '=', 'im.warehouse_id')
+                ->where('im.product_id', $request->product_filter)
+                ->groupBy('im.warehouse_id', 'w.name', 'w.code')
+                ->having('warehouse_stock', '>', 0)
+                ->orderBy('w.name')
+                ->get();
+        } else {
+            $productStockByWarehouse = collect(); // Colección vacía si no hay filtro
+        }
+        
+        // Obtener resultados ordenados por nombre de producto
+        $stockByProduct = $stockByProductQuery
             ->orderBy('p.name')
             ->get();
 
@@ -89,6 +123,9 @@ class InventoryController extends Controller
         $totalWarehouses = Warehouse::count();
         $totalMovements = InventoryMovement::count();
         $totalStock = $stockByProduct->sum('total_stock');
+
+        // Obtener datos para la pestaña activa
+        $activeTab = $request->input('tab', 'movements');
 
         return view('inventory', compact(
             'products', 
@@ -99,7 +136,9 @@ class InventoryController extends Controller
             'totalProducts',
             'totalWarehouses', 
             'totalMovements',
-            'totalStock'
+            'totalStock',
+            'activeTab',
+            'productStockByWarehouse'
         ));
     }
 
